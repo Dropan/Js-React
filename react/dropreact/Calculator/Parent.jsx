@@ -10,15 +10,13 @@ export default class Parent extends React.Component {
 
         this.state = {
             logs: [],
-            indicatorParent: true
         }
         this.onEqualsClick = this.onEqualsClick.bind(this);
     }
 
-    onEqualsClick(logs, indicatorCalc) {
+    onEqualsClick(logs) {
         this.setState({
             logs: this.state.logs.concat(logs),
-            indicatorParent: this.state.indicatorParent = indicatorCalc
         })
     }
     render() {

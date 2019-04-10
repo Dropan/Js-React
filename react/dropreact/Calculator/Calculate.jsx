@@ -1,19 +1,58 @@
 import React from "react";
 
-import { css } from "aphrodite/no-important";
-import styles from './calcStyle';
-import Logs from './Logs';
+import styled from 'styled-components';
+
+const DivCalc = styled.div`
+    background: #9ACD32;
+`;
+
+const DivCalcElements = styled.p`
+    margin-left: 33%;
+`;
+
+const Input = styled.input`
+    height: 21px;
+    border: 1px solid;
+    border-Color: #9ACD32;
+    background: #F5F5DC;
+    text-align: center;
+    color: #9ACD32;
+    font-size: large;
+`;
+
+const Select = styled.select`
+    height: 25px;
+    border: 1px solid;
+    border-color: #9ACD32;
+    background: #F5F5DC;
+    text-align: center;
+    font-size: large;
+    color: #9ACD32;
+`;
+
+const Button = styled.button`
+    height: 28px;
+    border: 2px outset;
+    border-color: #9ACD32;
+    background: #F5F5DC;
+    font-size: large;
+    color: #9ACD32;
+`;
+
+const Label = styled.label`
+    color: #F5F5DC;
+    font-size: large;
+`;
 
 export default class Calculate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            in1: 0,
-            in2: 0,
-            sel: '0',
-            res: ' ',
-            logs: '',
-            count: 0
+            input1: 0,
+            input2: 0,
+            select: '0',
+            result: 0,
+            count: 0,
         };
         this.Input1Change = this.Input1Change.bind(this);
         this.Input2Change = this.Input2Change.bind(this);
@@ -23,27 +62,15 @@ export default class Calculate extends React.Component {
 
     ResultValue() {
         this.state.count++;
-        switch (this.state.sel) {
+        switch (this.state.select) {
             case '+':
-                return (this.setState({
-                    res: this.state.res = Number(this.state.in1) + Number(this.state.in2),
-                    logs: this.state.logs.concat(this.state.count + ')\t' + this.state.in1 + ' + ' + this.state.in2 + ' = ' + this.state.res + '\n'),
-                }));
+                return this.props.onEqualsClick({ count: this.state.count, input1: this.state.input1, selelct: this.state.select, input2: this.state.input2, result: this.state.result = Number(this.state.input1) + Number(this.state.input2) })
             case '-':
-                return (this.setState({
-                    res: this.state.res = Number(this.state.in1) - Number(this.state.in2),
-                    logs: this.state.logs.concat(this.state.count + ')\t' + this.state.in1 + ' - ' + this.state.in2 + ' = ' + this.state.res + '\n')
-                }));
+                return this.props.onEqualsClick({ count: this.state.count, input1: this.state.input1, selelct: this.state.select, input2: this.state.input2, result: this.state.result = Number(this.state.input1) - Number(this.state.input2) })
             case '*':
-                return (this.setState({
-                    res: this.state.res = Number(this.state.in1) * Number(this.state.in2),
-                    logs: this.state.logs.concat(this.state.count + ')\t' + this.state.in1 + ' * ' + this.state.in2 + ' = ' + this.state.res + '\n')
-                }));
+                return this.props.onEqualsClick({ count: this.state.count, input1: this.state.input1, selelct: this.state.select, input2: this.state.input2, result: this.state.result = Number(this.state.input1) * Number(this.state.input2) })
             case '/':
-                return (this.setState({
-                    res: this.state.res = Number(this.state.in1) / Number(this.state.in2),
-                    logs: this.state.logs.concat(this.state.count + ')\t' + this.state.in1 + ' / ' + this.state.in2 + ' = ' + this.state.res + '\n')
-                }));
+                return this.props.onEqualsClick({ count: this.state.count, input1: this.state.input1, selelct: this.state.select, input2: this.state.input2, result: this.state.result = Number(this.state.input1) / Number(this.state.input2) })
             case '0':
                 return alert('Select operator');
             default:
@@ -52,49 +79,43 @@ export default class Calculate extends React.Component {
     }
 
     Input1Change(event) {
-        this.setState({ in1: event.target.value });
+        this.setState({ input1: event.target.value });
     }
 
     Input2Change(event) {
-        this.setState({ in2: event.target.value });
+        this.setState({ input2: event.target.value });
     }
 
     SelectChange(event) {
-        this.setState({ sel: event.target.value });
+        this.setState({ select: event.target.value });
     }
 
     render() {
         return (
-            <div>
-                <div className={css(styles.divCalc)}><br />
-                    <p className={css(styles.elements)}>
-                        <input
-                            autoFocus
-                            type="number"
-                            placeholder="Enter 1st value"
-                            onChange={this.Input1Change}
-                            className={css(styles.inp)}
-                        />
-                        <select value={this.state.sel} onChange={this.SelectChange} className={css(styles.sel)}>
-                            <option className={css(styles.sel)} value='0'>Select</option>
-                            <option className={css(styles.sel)} value='+'>+</option>
-                            <option className={css(styles.sel)} value='-'>-</option>
-                            <option className={css(styles.sel)} value='*'>*</option>
-                            <option className={css(styles.sel)} value='/'>/</option>
-                        </select>
-                        <input
-                            type="number"
-                            placeholder="Enter 2nd value"
-                            onChange={this.Input2Change}
-                            className={css(styles.inp)}
-                        />
-                        <button onClick={this.ResultValue} className={css(styles.but)}> Сalculate </button>
-                        <label className={css(styles.lbl)}> Result = {this.state.res}</label>
-                    </p>
-                    <br />
-                    <Logs logs={this.state.logs} />
-                </div>
-            </div >
+            <DivCalc ><br />
+                <DivCalcElements>
+                    <Input
+                        type="number"
+                        placeholder="Enter 1st value"
+                        onChange={this.Input1Change}
+                    />
+                    <Select value={this.state.select} onChange={this.SelectChange} >
+                        <option value='0'>Select</option>
+                        <option value='+'>+</option>
+                        <option value='-'>-</option>
+                        <option value='*'>*</option>
+                        <option value='/'>/</option>
+                    </Select>
+                    <Input
+                        type="number"
+                        placeholder="Enter 2nd value"
+                        onChange={this.Input2Change}
+                    />
+                    <Button onClick={this.ResultValue} > Сalculate </Button>
+                    <Label ><b>Result = {this.state.result}</b></Label>
+                </DivCalcElements>
+                <br />
+            </DivCalc>
         )
     }
 }

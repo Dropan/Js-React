@@ -13,8 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aphrodite": "^2.3.1",
+    "react": "^16.4.2",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.4.2",
-    "react": "^16.4.2"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
