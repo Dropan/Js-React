@@ -1,0 +1,26 @@
+{
+  "name": "dropprojects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test1": "jest /isbn10.test.js --collectCoverage=true",
+    "test2": "jest /isbn13.test.js --collectCoverage=true",
+    "test3": "jest /isbn.test.js --collectCoverage=true",
+    "test4": "jest /isbnValidator.test.js --collectCoverage=true",
+    "test5,6": "jest /ReturnListPropAndVal.test.js --collectCoverage=true",
+    "test7": "jest /InsIndel.test.js --collectCoverage=true",
+    "test8": "jest /algLevenshteinUnRec.test.js --collectCoverage=true",
+    "test9": "jest /algLevenshteinRec.test.js --collectCoverage=true",
+    "test:w": "jest --watchAll",
+    "test:c": "jest --collectCoverage=true"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.6.0"
+  }
+}
