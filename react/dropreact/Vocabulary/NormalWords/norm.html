@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<title>t</title>
+<style type="text/css">
+</style>
+<script language="JavaScript">
+function readfile()
+{
+var fso,filehandle,contents;
+fso = new ActiveXObject("Scripting.FileSystemObject");
+filehandle = fso.OpenTextFile("C:\\Users\\anovikov\\Desktop\\Drop\\JS\\DropProjects\\react\\dropreact\\Vocabulary\\file.txt",1);
+contents = filehandle.ReadAll();
+if (contents) document.all("filecontents").value = contents;
+filehandle.close();
+}
+</script>
+</head>
+<body onload="readfile()">
+<textarea id="filecontents" cols="50" rows="30"></textarea>
+</body>
+</html>
